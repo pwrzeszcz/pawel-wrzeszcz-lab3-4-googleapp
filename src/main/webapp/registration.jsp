@@ -23,37 +23,58 @@
 
             if (users.isEmpty()) {
         %>
-        <p>There are no registered users</p>
+        <p><h2>There are no registered users</h2></p>
         <%
             } else {
         %>
-        <p>Registered users </p>
-        <%
-            for (User user : users) {
-                pageContext.setAttribute("user_name", user.name);
-                pageContext.setAttribute("user_surname", user.surname);
-        %>
-        <p>${user.name} ${user_surname}</p>
+        <p><h2>Registered users</h2> </p>
+
+        <table class="table table-striped">
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+            <%
+                for (User user : users) {
+                    pageContext.setAttribute("user_id", user.id, PageContext.SESSION_SCOPE);
+                    pageContext.setAttribute("user_name", user.name, PageContext.SESSION_SCOPE);
+                    pageContext.setAttribute("user_surname", user.surname, PageContext.SESSION_SCOPE);
+                    pageContext.setAttribute("user_email", user.email, PageContext.SESSION_SCOPE);
+            %>
+             <tr>
+                <td><% out.print(user.id); %></td>
+                <td><% out.print(user.name); %></td>
+                <td><% out.print(user.surname); %></td>
+                <td><% out.print(user.email); %></td>
+            </tr>
         <%
                 }
+        %>
+            </tbody>
+                  </table>
+        <%
             }
         %>
+        Enter data to complete registration:<br><br>
         <form method="POST" action="/register">
           <div class="form-group">
             <label for="userName">Name</label>
-            <input type="text" class="form-control" id="userName" name="name" placeholder="Enter name">
+            <input type="text" class="form-control" id="userName" name="name" placeholder="Enter name" required>
           </div>
           <div class="form-group">
             <label for="userSurname">Surname</label>
-            <input type="text" class="form-control" id="userSurname" name="surname" placeholder="Enter surname">
+            <input type="text" class="form-control" id="userSurname" name="surname" placeholder="Enter surname" required>
           </div>
           <div class="form-group">
             <label for="userEmail">Email address</label>
-            <input type="email" class="form-control" id="userEmail" name="email" placeholder="Enter email">
+            <input type="email" class="form-control" id="userEmail" name="email" placeholder="Enter email" required>
           </div>
           <div class="form-group">
             <label for="userPassword">Password</label>
-            <input type="password" class="form-control" id="userPassword" name="password" placeholder="enter password">
+            <input type="password" class="form-control" id="userPassword" name="password" title="Password must contain at least 8 characters, including upper and lowercase letter, number or special character" placeholder="enter password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
