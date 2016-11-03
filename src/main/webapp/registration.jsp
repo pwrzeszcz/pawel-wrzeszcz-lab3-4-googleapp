@@ -27,7 +27,7 @@
         <%
             } else {
         %>
-        <p><h2>Registered users</h2> </p>
+        <p><h2>Recently registered users</h2> </p>
 
         <table class="table table-striped">
             <thead>
@@ -39,10 +39,7 @@
             <tbody>
             <%
                 for (User user : users) {
-                    pageContext.setAttribute("user_id", user.id, PageContext.SESSION_SCOPE);
-                    pageContext.setAttribute("user_name", user.name, PageContext.SESSION_SCOPE);
-                    pageContext.setAttribute("user_surname", user.surname, PageContext.SESSION_SCOPE);
-                    pageContext.setAttribute("user_email", user.email, PageContext.SESSION_SCOPE);
+
             %>
              <tr>
                 <td><% out.print(user.id); %></td>
@@ -59,24 +56,26 @@
             }
         %>
         Enter data to complete registration:<br><br>
-        <form method="POST" action="/register">
-          <div class="form-group">
-            <label for="userName">Name</label>
-            <input type="text" class="form-control" id="userName" name="name" placeholder="Enter name" required>
-          </div>
-          <div class="form-group">
-            <label for="userSurname">Surname</label>
-            <input type="text" class="form-control" id="userSurname" name="surname" placeholder="Enter surname" required>
-          </div>
-          <div class="form-group">
-            <label for="userEmail">Email address</label>
-            <input type="email" class="form-control" id="userEmail" name="email" placeholder="Enter email" required>
-          </div>
-          <div class="form-group">
-            <label for="userPassword">Password</label>
-            <input type="password" class="form-control" id="userPassword" name="password" title="Password must contain at least 8 characters, including upper and lowercase letter, number or special character" placeholder="enter password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <div class="col-md-4">
+            <form method="POST" action="/register">
+              <div class="form-group">
+                <label for="userName">Name</label>
+                <input type="text" class="form-control" id="userName" name="name" placeholder="Enter name" required>
+              </div>
+              <div class="form-group">
+                <label for="userSurname">Surname</label>
+                <input type="text" class="form-control" id="userSurname" name="surname" placeholder="Enter surname" required>
+              </div>
+              <div class="form-group">
+                <label for="userEmail">Email address</label>
+                <input type="email" class="form-control" id="userEmail" name="email" placeholder="Enter email" required>
+              </div>
+              <div class="form-group">
+                <label for="userPassword">Password</label>
+                <input type="password" class="form-control" id="userPassword" name="password" title="Password must contain at least 8 characters, including upper and lowercase letter, number or special character" placeholder="Enter password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </body>
 </html>
